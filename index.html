@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="eng">
+    <head>
+        <meta charset="UTF-8">
+        <title>JS Project 1 - RPS </title>
+    </head>
+    <body>
+        <script>
+            const playerSelect = prompt("Rock, paper, scissor?", "");
+            const playerSelection = playerSelect.toUpperCase();
+            const computerSelection = getComputerChoice();
+            function getComputerChoice() {
+                let rand = Math.floor(Math.random()*3);
+                    if (rand == 0) {
+                        return "ROCK";
+                    } else if (rand == 1) {
+                        return "SCISSOR";
+                    } else return "PAPER";
+            }
+
+            function playRound(playerSelection, computerSelection) {
+                    if (playerSelection === "PAPER" && computerSelection === "SCISSOR") {
+                        return "You lose the game. You played paper and computer played scissor.";
+                    } else if (playerSelection === "ROCK" && computerSelection === "SCISSOR") {
+                        return "You win the game. You played rock and computer played scissor.";
+                    } else if (playerSelection === "ROCK" && computerSelection === "PAPER") {
+                        return "You lose the game. You played rock and computer played paper.";
+                    } else if (playerSelection === "SCISSOR" && computerSelection === "ROCK") {
+                        return "You lose the game. You played scissor and computer played rock.";
+                    } else if (playerSelection === "SCISSOR" && computerSelection === "PAPER") {
+                        return "You win the game. You played scissor and computer played paper.";
+                    } else if (playerSelection === "PAPER" && computerSelection === "ROCK") {
+                        return "You win the game. You played paper and computer played rock.";
+                    } else return "The game ended in a tie.";
+            }
+
+            console.log(playRound(playerSelection, computerSelection));
+
+        </script>
+    </body>
+</html>
