@@ -3,54 +3,108 @@
     <head>
         <meta charset="UTF-8">
         <title>JS Project 1 - RPS </title>
+        <link rel="stylesheet" href="style.css">
     </head>
     <body>
+        <header>Rock, Paper or Scissor</header>
+        <div class="content">
+            <button class="play">Play</button> 
+            <div class="instruct">Press play to start</div>
+            <div class="choices">
+                <button class="rock">ROCK</button>
+                <button class="paper">PAPER</button>
+                <button class="scissor">SCISSOR</button><br>
+            </div>
+            <div class="result"></div><br>
+            <div class="score"></div><br>
+            <button class="reset">Click here to reset</button><br>
+            <div class="reset1"></div>
+        </div>
         <script>
-            
+            const body = document.querySelector('body');
+            const play = document.querySelector('button.play')
+            const result = document.querySelector('div.result');
+            const score = document.querySelector('div.score');
+            const rock = document.querySelector('button.rock');
+            const paper = document.querySelector('button.paper');
+            const scissor = document.querySelector('button.scissor');
+            const instruct = document.querySelector('div.instruct');
+            const reset = document.querySelector('button.reset');
+            const reset1 = document.querySelector('div.reset1');
+
+            play.addEventListener('click', playMode);
+
             let playerScore = 0;
             let computerScore = 0;
 
+            function playMode() {
+                result.textContent = 'Time to play! First to reach 5 points wins.';
+                play.style.display = 'none';
+                instruct.style.display = 'none';
+                game();
+            };
+            
             function playRound(playerSelection, computerSelection) {
+                result.style.display = 'initial';
                 if (playerSelection === computerSelection) {
-                    alert(`The game is a tie. The player score is ${playerScore} and computer score is ${computerScore}.`);
+                    result.textContent = `The game is a tie. Both players chose ${playerSelection}. The player score is ${playerScore} and computer score is ${computerScore}.`;
                 }
                 if ((playerSelection == 'ROCK' && computerSelection == 'SCISSOR') ||
                     (playerSelection == 'PAPER' && computerSelection == 'ROCK') ||
                     (playerSelection == 'SCISSOR' && computerSelection == 'PAPER')) {
                     playerScore++;
-                    alert(`You won! ${playerSelection} beats ${computerSelection}. The player score is ${playerScore} and computer score is ${computerScore}.`);
+                    result.textContent = `You won! ${playerSelection} beats ${computerSelection}. The player score is ${playerScore} and computer score is ${computerScore}.`;
                     }
                 if ((playerSelection == 'ROCK' && computerSelection == 'PAPER') ||
                     (playerSelection == 'PAPER' && computerSelection == 'SCISSOR') ||
                     (playerSelection == 'SCISSOR' && computerSelection == 'ROCK')) {
                     computerScore++;
-                    alert(`You lost! ${computerSelection} beats ${playerSelection}. The player score is ${playerScore} and computer score is ${computerScore}.`);
+                    result.textContent = `You lost! ${computerSelection} beats ${playerSelection}. The player score is ${playerScore} and computer score is ${computerScore}.`;
                     }
-            }
+                if (playerScore == 5) {
+                    score.style.display = 'initial';
+                    score.textContent = `The player has won. The final score is Player ${playerScore} : Computer ${computerScore}.`;
+                    rock.style.display = 'none';
+                    paper.style.display = 'none';
+                    scissor.style.display = 'none';
+                } else if (computerScore == 5) {
+                    score.style.display = 'initial';
+                    score.textContent = `The computer has won. The final score is Player ${playerScore} : Computer ${computerScore}.`;
+                    rock.style.display = 'none';
+                    paper.style.display = 'none';
+                    scissor.style.display = 'none';
+                }
+            };
         
             function game() {
-                for (let i = 0; i < 5; i++) {
-                    let playerSelect = prompt("Rock, paper, scissor?", "");
-                    let playerSelection = playerSelect.toUpperCase();
-                    let computerSelection = getComputerChoice();
-                    function getComputerChoice() {
-                    let rand = Math.floor(Math.random()*3);
-                        if (rand == 0) {
-                            return "ROCK";
-                        } else if (rand == 1) {
-                            return "SCISSOR";
-                        } else return "PAPER";
-                }
-                    playRound(playerSelection, computerSelection);
-                }
-                if (playerScore > computerScore) {
-                    alert(`The player has won. The final score is Player ${playerScore} : Computer ${computerScore}.`);
-                } else if (playerScore < computerScore) {
-                    alert (`The computer has won. The final score is Player ${playerScore} : Computer ${computerScore}.`);
-                } else alert ("The game ended in a tie.")
+                reset.addEventListener('click', resetScore);
+                let playerSelection;
+                let computerSelection;
+                scissor.addEventListener('click', () => (reset1.style.display = 'none') && (playerSelection = "SCISSOR") && (playRound(playerSelection, getComputerChoice())));
+                rock.addEventListener('click', () => (reset1.style.display = 'none') && (playerSelection = "ROCK") && (playRound(playerSelection, getComputerChoice())));
+                paper.addEventListener('click', () => (reset1.style.display = 'none') && (playerSelection = "PAPER") && (playRound(playerSelection, getComputerChoice())));
+            };
+            
+            function resetScore() {
+                playerScore = 0;
+                computerScore = 0;
+                result.style.display = 'none';
+                score.style.display = 'none';
+                reset1.style.display = 'initial';
+                reset1.textContent = 'The game has reset. Both scores are at 0 again.';
+                rock.style.display = 'initial';
+                paper.style.display = 'initial';
+                scissor.style.display = 'initial';
             }
 
-            console.log(game());
+            function getComputerChoice() {
+                var rand = Math.floor(Math.random()*3);
+                    if (rand == 0) {
+                        return "ROCK";
+                    } else if (rand == 1) {
+                        return "SCISSOR";
+                    } else return "PAPER";
+            }
 
         </script>
     </body>

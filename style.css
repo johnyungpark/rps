@@ -1,0 +1,66 @@
+html {
+    background-color: lightsalmon;
+    font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.content {
+    display: flex;
+    height: 75vh;
+    flex-shrink:0;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+}
+
+header {
+    color: darkgreen;
+    text-align: center;
+    font-weight: bolder;
+    font-size: 45px;
+    background-color: aquamarine;
+    border-radius: 5em;
+}
+
+.play {
+    margin-top: 15px;
+    margin-bottom: 0;
+}
+
+.instruct {
+    margin-top: 0;
+    margin: 10px;
+}
+
+button {
+    background-color: beige;
+    border-color: darkcyan;
+    border-radius: 20px;
+    padding: 10px;
+    font-size: 20px;
+    margin: 5px;
+    font-weight: bolder;
+}
+
+.rock, .paper, .scissor {
+    font-size: 30px;
+    height: 100px;
+    width: 180px;
+    margin: 20px
+}
+
+.reset {
+    font-size: 15px;
+    margin-top: 5px;
+}
+
+.result {
+    font-size: 25px;
+}
+
+.score {
+    color: darkred;
+    background-color:yellow;
+    margin-top: 15px;
+    font-size: 40px;
+    font-weight: bolder;
+}
